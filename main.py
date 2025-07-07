@@ -10,14 +10,17 @@ import os
 
 load_dotenv()
 
-api = os.getenv("API_KEY")
+api = st.secrets.get("API_KEY") or os.getenv("API_KEY")
 print(api)
-
-
 # === API Setup ===
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=api,
+    default_headers={
+        "Authorization": f"Bearer {api}",
+        "HTTP-Referer": "localhost",  # Optional, for OpenRouter analytics
+        "X-Title": "IEEE-Formatter",  # Optional, for OpenRouter analytics
+    },
 )
 
 # === AI Formatter ===
