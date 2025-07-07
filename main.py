@@ -5,11 +5,19 @@ from docx.shared import Inches, Pt
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from io import BytesIO
 import re
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+api = os.getenv("API_KEY")
+print(api)
+
 
 # === API Setup ===
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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",
+    api_key=api,
 )
 
 # === AI Formatter ===
